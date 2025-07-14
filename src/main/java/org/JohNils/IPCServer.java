@@ -15,16 +15,13 @@ public class IPCServer implements Runnable {
                      BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()))) {
 
                     String line = in.readLine();
-                    if ("toggle".equalsIgnoreCase(line)) {
-                        SwingUtilities.invokeLater(() -> {
-                            if (Main.window.isVisible()) {
-                                Main.window.setVisible(false);
-                            } else {
-                                Main.window.setVisible(true);
-                                Main.window.toFront();
-                            }
-                        });
+                    if (!"show".equalsIgnoreCase(line)) {
+                        Main.window.textField.setText(line);
+                        Main.window.textField.setCaretPosition(line.length());
                     }
+                    Main.window.setVisible(true);
+
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

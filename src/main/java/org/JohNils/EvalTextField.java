@@ -8,42 +8,22 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 
-public class GhostEvalTextField extends JTextField {
+public class EvalTextField extends JTextField {
     private String ghostText = "";
 
-    private final ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
-
-    public GhostEvalTextField(int columns) {
-        super(columns);
-
-        this.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                evaluateExpression();
-                repaint();
-            }
-        });
+    public EvalTextField() {
     }
 
-    private void evaluateExpression() {
-        String input = getText();
-        try {
-            Object result = engine.eval(input);
-            if (result != null) {
-                ghostText = " = " + result.toString();
-            } else {
-                ghostText = "";
-            }
-        } catch (ScriptException e) {
-            ghostText = "";
-        }
+    public void setEval(String eval) {
+        this.ghostText = eval;
     }
 
     @Override
     protected void paintComponent(Graphics g) {
+        ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
         super.paintComponent(g);
 
-        ((Graphics2D) g).setRenderingHint(RenderingHints.);
 
         // Don't draw ghost text if not needed
         if (ghostText.isEmpty()) return;
