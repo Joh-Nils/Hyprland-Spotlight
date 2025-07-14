@@ -1,13 +1,15 @@
 package org.JohNils;
 
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineFactory;
+import javax.script.ScriptEngineManager;
 import javax.swing.*;
 import java.awt.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 public class Main {
     public static Window window;
 
@@ -30,9 +32,6 @@ public class Main {
         final Dimension finalScreen = screen;
 
         SwingUtilities.invokeLater(() -> {
-            try {
-                Thread.sleep(500); // Give WM a moment to fully initialize
-            } catch (InterruptedException ignored) {}
             window = new Window(finalScreen);
         });
 
